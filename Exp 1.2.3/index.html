@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SVG Drawing Tool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="toolbar">
+    <select id="shape">
+      <option value="line">Line</option>
+      <option value="rect">Rectangle</option>
+      <option value="circle">Circle</option>
+      <option value="freehand">Freehand</option>
+    </select>
+
+    <input type="color" id="color" value="#000000">
+
+    <button id="undo">Undo</button>
+  </div>
+
+  <svg id="canvas"
+       viewBox="0 0 1000 600"
+       preserveAspectRatio="xMidYMid meet">
+  </svg>
+
+  <script src="script.js"></script>
+</body>
+</html>

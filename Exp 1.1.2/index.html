@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banking Interface</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="balance" id="balance">Balance: $1000</div>
+    <label for="amount" class="amount-label">Amount</label>
+    <input type="number" id="amount" class="amount-input" placeholder="Enter amount" />
+    <div class="button-row">
+      <button class="btn deposit" id="depositBtn">Deposit</button>
+      <button class="btn withdraw" id="withdrawBtn">Withdraw</button>
+    </div>
+    <div class="feedback" id="feedback"></div>
+  </div>
+  <script>
+    let balance = 1000;
+    const balanceEl = document.getElementById('balance');
+    const amountEl = document.getElementById('amount');
+    const feedbackEl = document.getElementById('feedback');
+
+    function updateBalance() {
+      balanceEl.textContent = `Balance: $${balance}`;
+    }
+
+    function showFeedback(msg, isError = false) {
+      feedbackEl.textContent = msg;
+      feedbackEl.style.color = isError ? 'red' : 'green';
+    }
+
+    document.getElementById('depositBtn').onclick = function() {
+      const amount = parseFloat(amountEl.value);
+      if (isNaN(amount) || amount <= 0) {
+        showFeedback('Invalid amount!', true);
+        return;
+      }
+      balance += amount;
+      updateBalance();
+      showFeedback('Deposit successful!');
+      amountEl.value = '';
+    };
+
+    document.getElementById('withdrawBtn').onclick = function() {
+      const amount = parseFloat(amountEl.value);
+      if (isNaN(amount) || amount <= 0 || amount > balance) {
+        showFeedback('Invalid amount!', true);
+        return;
+      }
+      balance -= amount;
+      updateBalance();
+      showFeedback('Withdrawal successful!');
+      amountEl.value = '';
+    };
+  </script>
+</body>
+</html>

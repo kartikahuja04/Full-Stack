@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Admin Dashboard</title>
+	<link rel="stylesheet" href="sytle.css">
+</head>
+<body>
+	<div class="dashboard">
+		<header class="header">
+			<h1>Admin Dashboard</h1>
+			<button id="theme-toggle">Toggle Theme</button>
+		</header>
+		<nav class="sidebar">
+			<ul>
+				<li>Overview</li>
+				<li>Users</li>
+				<li>Settings</li>
+				<li>Reports</li>
+			</ul>
+		</nav>
+		<main class="main-content">
+			<h2>Welcome, Admin!</h2>
+			<div class="cards">
+				<div class="card">Users<br><span>1,234</span></div>
+				<div class="card">Sales<br><span>$12,345</span></div>
+				<div class="card">Visits<br><span>56,789</span></div>
+				<div class="card">Alerts<br><span>3</span></div>
+			</div>
+		</main>
+		<footer class="footer">&copy; 2026 Admin Dashboard</footer>
+	</div>
+	<script>
+		// Theme switching logic
+		const root = document.documentElement;
+		const themeToggle = document.getElementById('theme-toggle');
+		const THEME_KEY = 'dashboard-theme';
+
+		function setTheme(theme) {
+			root.setAttribute('data-theme', theme);
+			localStorage.setItem(THEME_KEY, theme);
+		}
+
+		function getTheme() {
+			return localStorage.getItem(THEME_KEY) || 'light';
+		}
+
+		themeToggle.onclick = function() {
+			const current = getTheme();
+			setTheme(current === 'light' ? 'dark' : 'light');
+		};
+
+		// On load, set theme from localStorage
+		setTheme(getTheme());
+	</script>
+</body>
+</html>

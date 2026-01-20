@@ -1,0 +1,37 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #000000;
+}
+
+.toolbar {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background: #9bc7d2;
+}
+
+.toolbar select,
+.toolbar input,
+.toolbar button {
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+.toolbar button {
+  cursor: pointer;
+}
+
+#canvas {
+  width: 95vw;
+  height: 80vh;
+  margin: 10px auto;
+  display: block;
+  background: white;
+  border: 2px solid #ccc;
+}

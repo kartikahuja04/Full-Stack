@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Student Registration Form</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<div class="form-container">
+		<h2>Student Registration</h2>
+		<form id="registrationForm" novalidate>
+			<div class="input-group">
+				<label for="name">Full Name:</label>
+				<input type="text" id="name" name="name" required minlength="9" maxlength="50" pattern="[A-Za-z ]{9,50}">
+				<div class="error-message" id="nameError"></div>
+			</div>
+			<div class="input-group">
+				<label for="email">Email:</label>
+				<input type="email" id="email" name="email" required>
+				<div class="error-message" id="emailError"></div>
+			</div>
+			<div class="input-group">
+				<label for="age">Age:</label>
+				<input type="number" id="age" name="age" required min="16" max="30">
+				<div class="error-message" id="ageError"></div>
+			</div>
+			<button type="submit">Register</button>
+		</form>
+	</div>
+	<script>
+	const form = document.getElementById('registrationForm');
+	const nameInput = document.getElementById('name');
+	const emailInput = document.getElementById('email');
+	const ageInput = document.getElementById('age');
+	const nameError = document.getElementById('nameError');
+	const emailError = document.getElementById('emailError');
+	const ageError = document.getElementById('ageError');
+
+	form.addEventListener('submit', function(e) {
+		let valid = true;
+		// Name validation
+		if (!nameInput.value.match(/^[A-Za-z ]{9,50}$/)) {
+			nameError.textContent = 'Must contain 9-50 letters';
+			nameInput.style.borderColor = 'red';
+			valid = false;
+		} else {
+			nameError.textContent = '';
+			nameInput.style.borderColor = '';
+		}
+		// Email validation
+		if (!emailInput.value.match(/^\S+@\S+\.\S+$/)) {
+			emailError.textContent = 'Valid email required';
+			emailInput.style.borderColor = 'red';
+			valid = false;
+		} else {
+			emailError.textContent = '';
+			emailInput.style.borderColor = '';
+		}
+		// Age validation
+		const age = parseInt(ageInput.value, 10);
+		if (isNaN(age) || age < 16 || age > 30) {
+			ageError.textContent = 'Age 16-30 only';
+			ageInput.style.borderColor = 'red';
+			valid = false;
+		} else {
+			ageError.textContent = '';
+			ageInput.style.borderColor = '';
+		}
+		if (!valid) {
+			e.preventDefault();
+		}
+	});
+	</script>
+</body>
+</html>
