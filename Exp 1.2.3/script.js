@@ -2,6 +2,7 @@ const canvas = document.getElementById("canvas");
 const shapeSelector = document.getElementById("shape");
 const colorPicker = document.getElementById("color");
 const undoBtn = document.getElementById("undo");
+const clearBtn = document.getElementById("clear");
 
 let isDrawing = false;
 let startX, startY;
@@ -118,4 +119,13 @@ undoBtn.addEventListener("click", () => {
   if (history.length === 0) return;
   const last = history.pop();
   canvas.removeChild(last);
+});
+
+clearBtn.addEventListener("click", () => {
+  // Remove all drawn shapes from the SVG
+  while (canvas.lastChild) {
+    canvas.removeChild(canvas.lastChild);
+  }
+  // Reset history so Undo doesn't try to remove old elements
+  history = [];
 });

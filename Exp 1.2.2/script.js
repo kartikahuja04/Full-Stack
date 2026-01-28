@@ -1,13 +1,39 @@
-// Sample product data
 const products = [
-    { id: 1, name: "Wireless Mouse", price: 499, image: "https://via.placeholder.com/100?text=Mouse" },
-    { id: 2, name: "Bluetooth Headphones", price: 1299, image: "https://via.placeholder.com/100?text=Headphones" },
-    { id: 3, name: "USB-C Charger", price: 699, image: "https://via.placeholder.com/100?text=Charger" },
-    { id: 4, name: "Laptop Stand", price: 899, image: "https://via.placeholder.com/100?text=Stand" },
-    { id: 5, name: "Webcam", price: 999, image: "https://via.placeholder.com/100?text=Webcam" },
-    { id: 6, name: "Mechanical Keyboard", price: 2499, image: "https://via.placeholder.com/100?text=Keyboard" },
-    { id: 7, name: "Portable SSD", price: 3499, image: "https://via.placeholder.com/100?text=SSD" },
-    { id: 8, name: "Smartwatch", price: 3999, image: "https://via.placeholder.com/100?text=Watch" }
+    {
+        id: 1,
+        name: "Wireless Mouse",
+        price: 499,
+        image:
+            "https://www.portronics.com/cdn/shop/files/Toad_8_Wireless_Mouse_for_Laptop_1440x.jpg?v=1732528723",
+    },
+    {
+        id: 2,
+        name: "Bluetooth Headphones",
+        price: 1299,
+        image:
+            "https://cdn.jiostore.online/v2/jmd-asp/jdprod/wrkr/products/pictures/item/free/resize-w:450/boat/494623560/0/1bmWNfO8OE-SooOwpW0L8-boAt-Bluetooth-Wireless-Headphone-494623560-i-1-1200Wx1200H.jpeg",
+    },
+    {
+        id: 3,
+        name: "Mechanical Keyboard",
+        price: 2499,
+        image:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc-VkgGIxihgGAq-xCIKdLuLs8DUyseeMioA&s",
+    },
+    {
+        id: 4,
+        name: "Portable SSD",
+        price: 3499,
+        image:
+            "https://cdn.jiostore.online/v2/jmd-asp/jdprod/wrkr/products/pictures/item/free/resize-w:450/sandisk/493839058/0/Gu3mN0kMkO-hNRTCpSj41-Sandisk-USB-SSD-493839058-i-1-1200Wx1200H.jpeg",
+    },
+    {
+        id: 5,
+        name: "Smartwatch",
+        price: 3999,
+        image:
+            "https://www.gonoise.com/cdn/shop/files/Artboard2-min.png?v=1713344000",
+    },
 ];
 
 const productList = document.getElementById('product-list');

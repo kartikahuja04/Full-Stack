@@ -4,60 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Character Counter</title>
-    <style>
-        .char-counter-container {
-            max-width: 600px;
-            margin: 20px auto;
-            display: flex;
-            flex-direction: column;
-        }
-        .char-label {
-            margin-bottom: 10px;
-            font-weight: bold;
-        }
-        .char-textarea {
-            resize: none;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            transition: border-color 0.3s;
-        }
-        .char-textarea:focus {
-            outline: none;
-            border-color: #007bff;
-        }
-        .char-count {
-            margin-top: 5px;
-            font-size: 14px;
-            color: #666;
-        }
-        .limit-reached {
-            color: red;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="char-counter-container">
         <label for="userText" class="char-label">Your Message</label>
         <textarea id="userText" class="char-textarea" rows="5" maxlength="150" placeholder="Type your message..."></textarea>
-        <div class="char-count" id="charCount">0 / 150</div>
+        <div class="char-count" id="charCount">Character counter: 0 / 150</div>
+        <div class="char-limit-message" id="charLimitMessage" style="display: none; color: red; font-weight: bold; margin-top: 4px;">Character limit reached</div>
     </div>
-    <script>
-        const textarea = document.getElementById('userText');
-        const charCount = document.getElementById('charCount');
-        const maxLength = textarea.maxLength;
-
-        textarea.addEventListener('input', function() {
-            const len = textarea.value.length;
-            charCount.textContent = `${len} / ${maxLength}`;
-            if (len >= maxLength) {
-                charCount.classList.add('limit-reached');
-            } else {
-                charCount.classList.remove('limit-reached');
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
