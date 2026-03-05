@@ -11,14 +11,10 @@ const app = express();
 app.use(express.json());
 app.use('/api', bookingRoutes);
 
-// Serve the root index.html from project root so visiting '/' is friendly
+
+// Serve a simple API message at root
 app.get('/', (req, res) => {
-	const indexPath = path.resolve(__dirname, '..', 'index.html');
-	res.sendFile(indexPath, (err) => {
-		if (err) {
-			res.status(500).send('Error loading page');
-		}
-	});
+	res.status(200).json({ message: 'Booking API is running. See /api/seats and /api/book endpoints.' });
 });
 
 export default app;

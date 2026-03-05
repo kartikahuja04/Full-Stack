@@ -11,20 +11,16 @@ const bookSeatService = async (seatId) => {
     }
 
     try {
-        const seatStatus = await getSeatStatus(seatId);
 
+        const seatStatus = await getSeatStatus(seatId);
         if (!seatStatus) {
             return { status: 404, message: 'Seat not found.' };
         }
-
         if (seatStatus !== 'available') {
             return { status: 400, message: 'Seat already booked.' };
         }
-
         await new Promise((res) => setTimeout(res, 2000));
-
         await bookSeat(seatId);
-
         return { status: 200, message: `Seat ${seatId} booked successfully.` };
 
     } finally {

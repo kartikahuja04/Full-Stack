@@ -3,29 +3,31 @@ import { redisClient } from '../../config/redis.js';
 const SEATS_HASH = 'seats';
 
 // Initialize seats in Redis if not present (idempotent)
-const ensureSeatsInitialized = async () => {
-    const exists = await redisClient.exists(SEATS_HASH);
-    if (!exists) {
-        // default 5 seats
-        await redisClient.hSet(SEATS_HASH, {
-            '1': 'available',
-            '2': 'available',
-            '3': 'available',
-            '4': 'available',
-            '5': 'available'
-        });
+import { Seat } from '../../models/seat.model.js';
+
+// Initialize seats in MongoDB if not present
+export const ensureSeatsInitialized = async () => {
+    const count = await Seat.countDocuments();
+    if (count === 0) {
+        await Seat.insertMany([
+            { seatId: '1', status: 'available' },
+            { seatId: '2', status: 'available' },
+            { seatId: '3', status: 'available' },
+            { seatId: '4', status: 'available' },
+            { seatId: '5', status: 'available' }
+        ]);
     }
 };
 
 const getSeatStatus = async (seatId) => {
     await ensureSeatsInitialized();
-    const status = await redisClient.hGet(SEATS_HASH, seatId);
-    return status; // null if not exists
+    const seat = await Seat.findOne({ seatId });
+    return seat ? seat.status : null;
 };
 
 const bookSeat = async (seatId) => {
     await ensureSeatsInitialized();
-    await redisClient.hSet(SEATS_HASH, seatId, 'booked');
+    await Seat.updateOne({ seatId }, { status: 'booked' });
 };
 
 const getAllSeats = async () => {
