@@ -1,0 +1,20 @@
+{
+  "name": "redis_locking_mechanism",
+  "version": "1.0.0",
+  "description": "Node.js API with Redis-based locking for seat booking.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^5.0.0",
+    "redis": "^4.6.0",
+    "uuid": "^9.0.0",
+    "mongoose": "^8.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  }
+}
