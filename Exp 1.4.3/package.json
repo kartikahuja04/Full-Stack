@@ -4,13 +4,16 @@
   "description": "Node.js API with Redis-based locking for seat booking.",
   "main": "index.js",
   "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.21.0",
+    "express": "^5.0.0",
     "redis": "^4.6.0",
     "uuid": "^9.0.0"
   },
