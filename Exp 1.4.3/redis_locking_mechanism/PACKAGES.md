@@ -4,6 +4,7 @@
 This project is a small Node.js API with Redis-based locking and an Artillery load test. It runs locally with Docker for Redis and uses a feature-based module layout.
 
 ## Runtime Dependencies (package.json)
+
 ### express
 - Purpose: HTTP server and routing.
 - Usage in this repo: Handles request routing and JSON parsing for the booking API.
@@ -30,6 +31,7 @@ This project is a small Node.js API with Redis-based locking and an Artillery lo
 - Notes: Typically a dev dependency; it is currently listed under dependencies.
 
 ## Tools and Infrastructure
+
 ### Docker
 - Purpose: Runs Redis locally without a native install.
 - Usage in this repo: Redis is started with `docker run -d --name redis-server -p 6379:6379 redis`.

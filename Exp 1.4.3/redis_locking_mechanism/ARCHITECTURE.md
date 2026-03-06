@@ -3,6 +3,7 @@
 This project is a small Node.js API that demonstrates a Redis-based locking pattern to prevent double-booking of seats under concurrent load. The service is organized by feature (booking) and uses a simple in-memory model to simulate persistence.
 
 ## System Context
+
 - Client sends HTTP requests to the API.
 - Express handles routing and JSON parsing.
 - Booking logic acquires a Redis lock before reading/updating seat state.
@@ -10,6 +11,7 @@ This project is a small Node.js API that demonstrates a Redis-based locking patt
 - A load test (Artillery) targets the booking endpoint.
 
 ## Runtime Components
+
 - Entry point: index.js
   - Connects to Redis.
   - Starts the HTTP server on port 3000.
@@ -28,6 +30,7 @@ This project is a small Node.js API that demonstrates a Redis-based locking patt
   - releaseLock: verifies lock ownership before delete.
 
 ## Request Flow
+
 1. Client calls POST /api/book/:seatId.
 2. Controller calls bookSeatService(seatId).
 3. Service acquires a Redis lock for the seat (lock:seat:<id>).
@@ -37,18 +40,21 @@ This project is a small Node.js API that demonstrates a Redis-based locking patt
 7. Response is returned with status and message.
 
 ## Concurrency and Locking
+
 - Lock key: lock:seat:<seatId>
 - Lock TTL: 10 seconds (default in acquireLock)
 - Ownership: release only if stored value matches lock token
 - Failure mode: if lock not acquired, API returns HTTP 423
 
 ## Data Model
+
 - In-memory object in booking.model.js:
   - keys: seat IDs (string)
   - values: "available" or "booked"
 - This is intentionally ephemeral and resets on server restart.
 
 ## Public API
+
 - POST /api/book/:seatId
   - Success: 200, Seat <id> booked successfully.
   - Seat already booked: 400
@@ -56,22 +62,26 @@ This project is a small Node.js API that demonstrates a Redis-based locking patt
   - Seat locked: 423
 
 ## Load Testing
+
 - load-test.yml defines an Artillery scenario:
   - Target: http://localhost:3000
   - Phase: 20s at 15 rps
   - Endpoint: POST /api/book/1
 
 ## Operational Notes
+
 - Redis must be running before the server starts.
 - Start the app with: npm run dev
 - The project uses ES modules ("type": "module").
 
 ## Tech Stack
+
 - Node.js + Express
 - Redis
 - Artillery (load testing)
 
 ## Key Files
+
 - index.js
 - src/app.js
 - src/config/redis.js

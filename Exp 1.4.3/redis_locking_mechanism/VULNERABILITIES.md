@@ -3,6 +3,7 @@
 This document outlines potential security and reliability risks observed in the current architecture and tooling. It is tailored to this repository and focuses on practical risks rather than a full formal threat model.
 
 ## High-Impact Risks
+
 ### No authentication or authorization
 - Risk: Any client can book any seat.
 - Impact: Unauthorized usage, spoofed bookings, or abuse.
@@ -14,6 +15,7 @@ This document outlines potential security and reliability risks observed in the 
 - Mitigation: Bind Redis to localhost or a private network, enable ACLs, use TLS where supported, and avoid exposing port 6379 publicly.
 
 ## Medium-Impact Risks
+
 ### In-memory seat state
 - Risk: Seat state resets on restart and is not shared across instances.
 - Impact: Lost bookings and inconsistent behavior in multi-instance deployments.
@@ -30,6 +32,7 @@ This document outlines potential security and reliability risks observed in the 
 - Mitigation: Run `npm audit` regularly and pin or update packages with security fixes.
 
 ## Low-Impact or Operational Risks
+
 ### Docker default configuration
 - Risk: Running Redis with default config may allow unauthenticated access if port exposure changes.
 - Impact: Local environment compromise or data tampering during tests.
