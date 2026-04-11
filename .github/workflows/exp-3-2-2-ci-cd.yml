@@ -120,7 +120,7 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     needs: [install, test, build, deploy]
-    if: always() && secrets.SLACK_WEBHOOK_URL != ''
+    if: always()
     steps:
       - name: Slack success notification
         if: needs.install.result == 'success' && needs.test.result == 'success' && needs.build.result == 'success' && (needs.deploy.result == 'success' || needs.deploy.result == 'skipped')
@@ -128,6 +128,10 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           COMMIT_MESSAGE: ${{ github.event.head_commit.message || github.event.pull_request.title }}
         run: |
+          if [ -z "$SLACK_WEBHOOK_URL" ]; then
+            echo "SLACK_WEBHOOK_URL not set. Skipping Slack success notification."
+            exit 0
+          fi
           payload=$(cat <<EOF
           {
             "text": "✅ Exp 3.2.2 CI/CD succeeded for ${{ github.repository }}\\nBranch: ${{ github.ref_name }}\\nCommit: ${COMMIT_MESSAGE}"
@@ -142,6 +146,10 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           COMMIT_MESSAGE: ${{ github.event.head_commit.message || github.event.pull_request.title }}
         run: |
+          if [ -z "$SLACK_WEBHOOK_URL" ]; then
+            echo "SLACK_WEBHOOK_URL not set. Skipping Slack failure notification."
+            exit 0
+          fi
           payload=$(cat <<EOF
           {
             "text": "❌ Exp 3.2.2 CI/CD failed for ${{ github.repository }}\\nBranch: ${{ github.ref_name }}\\nCommit: ${COMMIT_MESSAGE}\\nRun: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
